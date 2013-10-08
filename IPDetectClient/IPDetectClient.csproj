@@ -1,0 +1,269 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <StartupObject>
+    </StartupObject>
+    <PublishUrl>C:\projects\异网IP检测\Client\IPDetectClient\publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>大带宽LOGO.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{AB477111-B178-404C-BE1A-026D92819E49}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>IPDectect.Client</RootNamespace>
+    <AssemblyName>main</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>F829CE47312003D4B39CD9C264A4EC637714B730</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>IPDetectClient_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Business\MonitorBiz.cs" />
+    <Compile Include="Business\SettingBiz.cs" />
+    <Compile Include="Common\CSVExport.cs" />
+    <Compile Include="Common\DataManager.cs" />
+    <Compile Include="Common\JsonSharp.cs" />
+    <Compile Include="Common\ModifyRegistry.cs" />
+    <Compile Include="Encryption\DESHelper.cs" />
+    <Compile Include="Common\HttpRequestHelper.cs" />
+    <Compile Include="Business\UserBiz.cs" />
+    <Compile Include="Common\Constants.cs" />
+    <Compile Include="Common\JsonConverter.cs" />
+    <Compile Include="Encryption\MD5Helper.cs" />
+    <Compile Include="Common\NetworkHelper.cs" />
+    <Compile Include="Common\RegionDataProvider.cs" />
+    <Compile Include="frmHelp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmHelp.Designer.cs">
+      <DependentUpon>frmHelp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLogin.Designer.cs">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMain.Designer.cs">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ClientIPResponse.cs" />
+    <Compile Include="Models\ClientIPViewModel.cs" />
+    <Compile Include="Models\LoginRequest.cs" />
+    <Compile Include="Models\LoginResponse.cs" />
+    <Compile Include="Models\MonitorData.cs" />
+    <Compile Include="Models\MonitorDataResponse.cs" />
+    <Compile Include="Models\ObjectEntity.cs" />
+    <Compile Include="Models\RouteItem.cs" />
+    <Compile Include="Models\RouteDataResponse.cs" />
+    <Compile Include="Models\SettingData.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="frmSet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSet.Designer.cs">
+      <DependentUpon>frmSet.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="frmHelp.resx">
+      <DependentUpon>frmHelp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLogin.resx">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMain.resx">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="frmSet.resx">
+      <DependentUpon>frmSet.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="region.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\1.png" />
+    <None Include="Resources\下拉菜单按钮-指上1.png" />
+    <None Include="Resources\下拉菜单按钮-正常1.png" />
+    <None Include="Resources\下拉菜单按钮-点击1.png" />
+    <None Include="Resources\输入框_指上 点击1.png" />
+    <None Include="Resources\输入框_正常1.png" />
+    <None Include="Resources\输入框_不可输入1.png" />
+    <None Include="Resources\进度条-21.png" />
+    <None Include="Resources\进度条-11.png" />
+    <None Include="Resources\关闭-指上1.png" />
+    <None Include="Resources\关闭-正常1.png" />
+    <None Include="Resources\关闭-点击1.png" />
+    <None Include="Resources\分页-41.png" />
+    <None Include="Resources\分页-31.png" />
+    <None Include="Resources\分页-21.png" />
+    <None Include="Resources\分页-11.png" />
+    <None Include="Resources\表格-21.png" />
+    <None Include="Resources\表格-11.png" />
+    <None Include="Resources\logo1.png" />
+    <None Include="Resources\duoxuan_1_21.png" />
+    <None Include="Resources\duoxuan_1_11.png" />
+    <None Include="Resources\btn5-指上1.png" />
+    <None Include="Resources\btn5-正常1.png" />
+    <None Include="Resources\btn5-点击1.png" />
+    <None Include="Resources\btn4-指上1.png" />
+    <None Include="Resources\btn4-正常1.png" />
+    <None Include="Resources\btn4-选中1.png" />
+    <None Include="Resources\btn4-点击1.png" />
+    <None Include="Resources\btn3-指上1.png" />
+    <None Include="Resources\btn3-正常1.png" />
+    <None Include="Resources\btn3-点击1.png" />
+    <None Include="Resources\btn2-指上1.png" />
+    <None Include="Resources\btn2-正常1.png" />
+    <None Include="Resources\btn2-点击1.png" />
+    <None Include="Resources\btn1-指上1.png" />
+    <None Include="Resources\btn1-正常1.png" />
+    <None Include="Resources\btn1-点击1.png" />
+    <None Include="Resources\back-11.png" />
+    <None Include="Resources\11.png" />
+    <Content Include="Resources\back-1.png" />
+    <None Include="Resources\bg_set.png" />
+    <Content Include="Resources\btn1-指上.png" />
+    <Content Include="Resources\btn1-正常.png" />
+    <Content Include="Resources\btn1-点击.png" />
+    <Content Include="Resources\btn2-指上.png" />
+    <Content Include="Resources\btn2-正常.png" />
+    <Content Include="Resources\btn2-点击.png" />
+    <Content Include="Resources\btn3-指上.png" />
+    <Content Include="Resources\btn3-点击.png" />
+    <Content Include="Resources\btn4-指上.png" />
+    <Content Include="Resources\btn4-正常.png" />
+    <Content Include="Resources\btn4-点击.png" />
+    <Content Include="Resources\btn4-选中.png" />
+    <Content Include="Resources\btn5-指上.png" />
+    <Content Include="Resources\btn5-正常.png" />
+    <Content Include="Resources\btn5-点击.png" />
+    <Content Include="Resources\duoxuan_1_1.png" />
+    <Content Include="Resources\duoxuan_1_2.png" />
+    <None Include="Resources\logo 256x256.png" />
+    <Content Include="Resources\logo.png" />
+    <Content Include="Resources\下拉菜单按钮-指上.png" />
+    <Content Include="Resources\下拉菜单按钮-正常.png" />
+    <Content Include="Resources\下拉菜单按钮-点击.png" />
+    <Content Include="Resources\关闭-指上.png" />
+    <Content Include="Resources\关闭-正常.png" />
+    <Content Include="Resources\关闭-点击.png" />
+    <Content Include="Resources\分页-1.png" />
+    <Content Include="Resources\分页-2.png" />
+    <Content Include="Resources\分页-3.png" />
+    <Content Include="Resources\分页-4.png" />
+    <Content Include="Resources\表格-1.png" />
+    <Content Include="Resources\表格-2.png" />
+    <Content Include="Resources\输入框_不可输入.png" />
+    <Content Include="Resources\输入框_指上 点击.png" />
+    <Content Include="Resources\输入框_正常.png" />
+    <Content Include="Resources\进度条-1.png" />
+    <Content Include="Resources\进度条-2.png" />
+    <None Include="Resources\btn3-正常.png" />
+    <Content Include="大带宽LOGO.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
