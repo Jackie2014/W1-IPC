@@ -99,6 +99,8 @@ namespace IPDectect.Client
                     this.WindowState = FormWindowState.Minimized;
                     this.Hide();
                 }
+                
+                this.menuScan.Visible = Constants.IsAdministrator;
                 this.ShowIcon = false;
                 top_lblCurrentIPRetrive.Image = this.imageList1.Images[0];
                 //this.pictureBox2.Image = this.imageList1.Images[0];
@@ -1276,6 +1278,20 @@ namespace IPDectect.Client
         {
             var frmSet = new frmSet();
             frmSet.Show();
+        }
+
+        private void menuScan_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                frmScan scanForm = new frmScan();
+
+                scanForm.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "错误");
+            }
         }
     }
 }

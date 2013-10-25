@@ -82,8 +82,10 @@
   <ItemGroup>
     <Compile Include="Business\MonitorBiz.cs" />
     <Compile Include="Business\SettingBiz.cs" />
+    <Compile Include="Business\CIDRSettingBiz.cs" />
     <Compile Include="Common\CSVExport.cs" />
     <Compile Include="Common\DataManager.cs" />
+    <Compile Include="Common\IPScan.cs" />
     <Compile Include="Common\JsonSharp.cs" />
     <Compile Include="Common\ModifyRegistry.cs" />
     <Compile Include="Encryption\DESHelper.cs" />
@@ -112,8 +114,17 @@
     <Compile Include="frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmScan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmScan.Designer.cs">
+      <DependentUpon>frmScan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CIDRSettingModel.cs" />
     <Compile Include="Models\ClientIPResponse.cs" />
     <Compile Include="Models\ClientIPViewModel.cs" />
+    <Compile Include="Models\IPScanResult.cs" />
+    <Compile Include="Models\IPScanConfiguration.cs" />
     <Compile Include="Models\LoginRequest.cs" />
     <Compile Include="Models\LoginResponse.cs" />
     <Compile Include="Models\MonitorData.cs" />
@@ -138,6 +149,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmScan.resx">
+      <DependentUpon>frmScan.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -256,6 +270,9 @@
     <Content Include="Resources\进度条-1.png" />
     <Content Include="Resources\进度条-2.png" />
     <None Include="Resources\btn3-正常.png" />
+    <Content Include="tcping.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="大带宽LOGO.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

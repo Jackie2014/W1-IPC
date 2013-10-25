@@ -8,7 +8,7 @@ namespace IPDectect.Client.Common
 {
     internal static class HttpCommunicatior
     {
-        public static string Post(string url, string method, string body)
+        public static string Post(string url, string method, string body = null)
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             ServicePointManager.ServerCertificateValidationCallback = 

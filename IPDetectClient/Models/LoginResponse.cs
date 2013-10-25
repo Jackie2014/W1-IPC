@@ -13,5 +13,11 @@ namespace IPDectect.Client.Models
             get;
             set;
         }
+
+        public bool IsAdministrator
+        {
+            get;
+            set;
+        }
     }
 }

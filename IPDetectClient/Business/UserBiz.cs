@@ -49,7 +49,9 @@ namespace IPDectect.Client.Business
                 }
 
                 Constants.CurrentToken = response.Token;
+                Constants.IsAdministrator = response.IsAdministrator;
                 DataManager.Save(Constants.SEPARATE_TOKEN, response.Token);
+                DataManager.Save(Constants.SEPARATE_MANAGE, response.IsAdministrator.ToString());
             }
             catch (WebException ex)
             {
