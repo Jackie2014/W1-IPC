@@ -37,11 +37,14 @@ namespace IPDectect.Client
         private void btnScan_Click(object sender, EventArgs e)
         {
 
-            var r = CIDRSettingBiz.GetCIDRSettings();
-            return;
+            var ipSettings = CIDRSettingBiz.GetCIDRSettings();
+    
             sbScanResult = new StringBuilder();
-            var ip1 = IPAddress.Parse("58.251.93.95");
-            var ip2 = IPAddress.Parse("58.251.93.255");
+            //var ip1 = IPAddress.Parse("58.251.93.95");
+            //var ip2 = IPAddress.Parse("58.251.93.255");
+
+            var ip1 = IPAddress.Parse(ipSettings[0].IPStart);
+            var ip2 = IPAddress.Parse(ipSettings[0].IPStart);
             var ipRange = IPScan.GetIPRange(ip1, ip2);
             List<IPScan> ipList = new List<IPScan>();
             foreach (string ipstr in ipRange)
