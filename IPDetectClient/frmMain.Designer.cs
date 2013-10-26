@@ -110,6 +110,7 @@
             this.p4_lbl_pageTotalRow = new System.Windows.Forms.Label();
             this.p4_lblLoading = new System.Windows.Forms.Label();
             this.panel_top = new System.Windows.Forms.Panel();
+            this.menuScan = new System.Windows.Forms.Label();
             this.top_lblHelp = new System.Windows.Forms.Label();
             this.top_lblLogQuery = new System.Windows.Forms.Label();
             this.top_lblCurrentIPRetrive = new System.Windows.Forms.Label();
@@ -120,7 +121,6 @@
             this.ToolStripMenuItem_Set = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenu_Exit = new System.Windows.Forms.ToolStripMenuItem();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.menuScan = new System.Windows.Forms.Label();
             this.Panel_P1_IPRetrive.SuspendLayout();
             this.Panel_P2_IPRetriving.SuspendLayout();
             this.Panel_P3_route.SuspendLayout();
@@ -1072,6 +1072,26 @@
             this.panel_top.Size = new System.Drawing.Size(599, 22);
             this.panel_top.TabIndex = 36;
             // 
+            // menuScan
+            // 
+            this.menuScan.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.menuScan.AutoSize = true;
+            this.menuScan.BackColor = System.Drawing.Color.Transparent;
+            this.menuScan.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.menuScan.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.menuScan.Font = new System.Drawing.Font("微软雅黑", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.menuScan.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.menuScan.Location = new System.Drawing.Point(273, 1);
+            this.menuScan.Margin = new System.Windows.Forms.Padding(0);
+            this.menuScan.Name = "menuScan";
+            this.menuScan.Size = new System.Drawing.Size(69, 20);
+            this.menuScan.TabIndex = 3;
+            this.menuScan.Text = "地址扫描";
+            this.menuScan.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.menuScan.Click += new System.EventHandler(this.menuScan_Click);
+            // 
             // top_lblHelp
             // 
             this.top_lblHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -1182,26 +1202,6 @@
             this.contextMenu_Exit.Text = "退出";
             this.contextMenu_Exit.Click += new System.EventHandler(this.contextMenu_Exit_Click);
             // 
-            // menuScan
-            // 
-            this.menuScan.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.menuScan.AutoSize = true;
-            this.menuScan.BackColor = System.Drawing.Color.Transparent;
-            this.menuScan.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.menuScan.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.menuScan.Font = new System.Drawing.Font("微软雅黑", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.menuScan.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.menuScan.Location = new System.Drawing.Point(273, 1);
-            this.menuScan.Margin = new System.Windows.Forms.Padding(0);
-            this.menuScan.Name = "menuScan";
-            this.menuScan.Size = new System.Drawing.Size(69, 20);
-            this.menuScan.TabIndex = 3;
-            this.menuScan.Text = "地址扫描";
-            this.menuScan.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.menuScan.Click += new System.EventHandler(this.menuScan_Click);
-            // 
             // frmMain
             // 
             this.AcceptButton = this.btnIPRetrive;
@@ -1209,10 +1209,10 @@
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.BackgroundImage = global::IPDectect.Client.Properties.Resources.back_1;
             this.ClientSize = new System.Drawing.Size(600, 375);
+            this.Controls.Add(this.Panel_P2_IPRetriving);
+            this.Controls.Add(this.Panel_P3_route);
             this.Controls.Add(this.Panel_P4_logSearch);
             this.Controls.Add(this.Panel_P1_IPRetrive);
-            this.Controls.Add(this.Panel_P3_route);
-            this.Controls.Add(this.Panel_P2_IPRetriving);
             this.Controls.Add(this.pictureBoxClose);
             this.Controls.Add(this.panel_top);
             this.Font = new System.Drawing.Font("微软雅黑", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
