@@ -106,8 +106,9 @@ namespace IPDectect.Client.AutoUpdate
                 // Just in case the server returned something other than a valid version number. 
                 version = Constants.Version_Number_Regex.IsMatch(version) ? version : null;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                string message = ex.Message;
                 // server or connection is having issues
             }
 
