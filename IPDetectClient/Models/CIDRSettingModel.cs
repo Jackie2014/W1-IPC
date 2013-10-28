@@ -7,6 +7,11 @@ namespace IPDetectServer.Models
 {
     public class CIDRSettingModel
     {
+        public int Seq
+        {
+            get;
+            set;
+        }
         public string ID
         {
             get;

@@ -51,7 +51,9 @@ namespace IPDectect.Client
             {
                 IPScan scan = new IPScan();
                 scan.IP = ipstr;
-                scan.PingTTLSet = 10;
+                scan.TTLFaZhiSet = ipSettings[0].TTLFaZhi;
+                scan.TCPFaZhiSet = ipSettings[0].TCPFaZhi;
+                scan.TCPPortSet = ipSettings[0].TCPPort;
                 ipList.Add(scan);
             }
 

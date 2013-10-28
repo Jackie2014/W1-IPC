@@ -256,10 +256,12 @@ namespace IPDectect.Client
         private void NavigateToIPRetriveHome()
         {
             this.AcceptButton = this.btnIPRetrive;
-            this.Panel_P1_IPRetrive.Visible = true;
-            this.Panel_P2_IPRetriving.Visible = false;
-            this.Panel_P3_route.Visible = false;
-            this.Panel_P4_logSearch.Visible = false;
+            this.Panel_P1_IPRetrive.BringToFront();
+            //this.Panel_P1_IPRetrive.Visible = true;
+            //this.Panel_P2_IPRetriving.Visible = false;
+            //this.Panel_P3_route.Visible = false;
+            //this.Panel_P4_logSearch.Visible = false;
+            //this.panel_p5_adminScan.Visible = false;
 
             this.p2_progressBar.Value = 0;
             this.p2_lbl_progressStatus.Text = "";
@@ -275,10 +277,11 @@ namespace IPDectect.Client
         {
             try
             {
-                this.Panel_P1_IPRetrive.Visible = false;
-                this.Panel_P2_IPRetriving.Visible = false;
-                this.Panel_P3_route.Visible = true;
-                this.Panel_P4_logSearch.Visible = false;
+                this.Panel_P3_route.BringToFront();
+                //this.Panel_P1_IPRetrive.Visible = false;
+                //this.Panel_P2_IPRetriving.Visible = false;
+                //this.Panel_P3_route.Visible = true;
+                //this.Panel_P4_logSearch.Visible = false;
 
                 this.CancelButton = this.p3_btn_back;
                 //this.p3_dvRoute.DataSource = null;

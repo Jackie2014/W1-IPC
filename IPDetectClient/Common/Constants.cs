@@ -7,8 +7,8 @@ namespace IPDectect.Client.Common
 {
     public static class Constants
     {
-        public static string CenterServerBaseUrl = "http://localhost:1885";
-        //public static string CenterServerBaseUrl = "https://ip.iwangding.com/ipmonitor";
+        //public static string CenterServerBaseUrl = "http://localhost:1885";
+        public static string CenterServerBaseUrl = "https://ip.iwangding.com/ipmonitor";
         private static string ROUTE_TARGET_SERVER = "ip.iwangding.com";
         private static int ROUTE_MAX_HOPS = 15;
         public const string PRODUCT_NAME = "IP地址定位助手";

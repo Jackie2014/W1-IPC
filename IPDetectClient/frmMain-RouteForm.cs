@@ -33,10 +33,11 @@ namespace IPDectect.Client
         {
             try
             {
-                this.Panel_P1_IPRetrive.Visible = false;
-                this.Panel_P2_IPRetriving.Visible = false;
-                this.Panel_P3_route.Visible = true;
-                this.Panel_P4_logSearch.Visible = false;
+                this.Panel_P3_route.BringToFront();
+                //this.Panel_P1_IPRetrive.Visible = false;
+                //this.Panel_P2_IPRetriving.Visible = false;
+                //this.Panel_P3_route.Visible = true;
+                //this.Panel_P4_logSearch.Visible = false;
 
                 this.CancelButton = this.p3_btn_back;
 
@@ -52,10 +53,11 @@ namespace IPDectect.Client
 
         private void p3_btn_back_Click(object sender, EventArgs e)
         {
-            this.Panel_P1_IPRetrive.Visible = false;
-            this.Panel_P2_IPRetriving.Visible = true;
-            this.Panel_P3_route.Visible = false;
-            this.Panel_P4_logSearch.Visible = false;
+            this.Panel_P2_IPRetriving.BringToFront();
+            //this.Panel_P1_IPRetrive.Visible = false;
+            //this.Panel_P2_IPRetriving.Visible = true;
+            //this.Panel_P3_route.Visible = false;
+            //this.Panel_P4_logSearch.Visible = false;
         }
     }
 }

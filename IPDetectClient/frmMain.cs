@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using System.Threading;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
+using System.Net;
 
 namespace IPDectect.Client
 {
@@ -35,8 +36,11 @@ namespace IPDectect.Client
             OnIPRetriveProgress += new IPRetriveProgress(UpdateUIProgress);
             OnLogQueryStatus += new LogQueryStatus(frmMain_OnLogQueryStatus);
 
+            OnIPScanProgress += new IPScanProgress(UpdateUIProgressForIPScan);
+
             try
             {
+                top_lblCurrentIPRetrive_Click(null, null);
                 SettingBiz biz = new SettingBiz();
                 myTimer.Tick += new EventHandler(TimerEventProcessor);
                 myTimer.Interval = biz.GetSettings().ExecuteInterval * (1000 * 60 * 60);
@@ -100,7 +104,7 @@ namespace IPDectect.Client
                     this.Hide();
                 }
                 
-                this.menuScan.Visible = Constants.IsAdministrator;
+                this.top_lblIPScan.Visible = Constants.IsAdministrator;
                 this.ShowIcon = false;
                 top_lblCurrentIPRetrive.Image = this.imageList1.Images[0];
                 //this.pictureBox2.Image = this.imageList1.Images[0];
@@ -488,8 +492,9 @@ namespace IPDectect.Client
                 SaveRetriveCondition(data);
 
                 // hide current panel and show ip retriving panel
-                this.Panel_P1_IPRetrive.Visible = false;
-                this.Panel_P2_IPRetriving.Visible = true;
+                this.Panel_P2_IPRetriving.BringToFront();
+                //this.Panel_P1_IPRetrive.Visible = false;
+                //this.Panel_P2_IPRetriving.Visible = true;
 
                 this.p2_progressBar.Visible = true;
                 this.p2_lbl_progressStatus.Visible = true;
@@ -581,6 +586,7 @@ namespace IPDectect.Client
             top_lblCurrentIPRetrive.Image = imageList1.Images[0];
             top_lblHelp.Image = null;
             top_lblLogQuery.Image = null;
+            top_lblIPScan.Image = null;
 
             NavigateToIPRetriveHome();
         }
@@ -631,18 +637,7 @@ namespace IPDectect.Client
             frmSet.Show();
         }
 
-        private void menuScan_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                frmScan scanForm = new frmScan();
 
-                scanForm.ShowDialog();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "错误");
-            }
-        }
+
     }
 }

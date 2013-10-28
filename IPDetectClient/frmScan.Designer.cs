@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.btnScan = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvIPRangeList = new System.Windows.Forms.DataGridView();
             this.Seq = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.rowSelect = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.IPStart = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -40,7 +40,7 @@
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.txtScanResult = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvIPRangeList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -62,10 +62,10 @@
             this.btnScan.UseVisualStyleBackColor = false;
             this.btnScan.Click += new System.EventHandler(this.btnScan_Click);
             // 
-            // dataGridView1
+            // dgvIPRangeList
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvIPRangeList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvIPRangeList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Seq,
             this.rowSelect,
             this.IPStart,
@@ -73,12 +73,12 @@
             this.TotalIP,
             this.TTLLimit,
             this.TCPTimeLimit});
-            this.dataGridView1.Location = new System.Drawing.Point(3, 44);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(593, 74);
-            this.dataGridView1.TabIndex = 15;
+            this.dgvIPRangeList.Location = new System.Drawing.Point(3, 44);
+            this.dgvIPRangeList.Name = "dgvIPRangeList";
+            this.dgvIPRangeList.RowHeadersVisible = false;
+            this.dgvIPRangeList.RowTemplate.Height = 23;
+            this.dgvIPRangeList.Size = new System.Drawing.Size(593, 74);
+            this.dgvIPRangeList.TabIndex = 15;
             // 
             // Seq
             // 
@@ -163,7 +163,7 @@
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.txtScanResult);
             this.Controls.Add(this.progressBar1);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dgvIPRangeList);
             this.Controls.Add(this.btnScan);
             this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -173,7 +173,7 @@
             this.Text = "frmScan";
             this.TopMost = true;
             this.Load += new System.EventHandler(this.frmScan_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvIPRangeList)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -183,7 +183,7 @@
         #endregion
 
         private System.Windows.Forms.Button btnScan;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvIPRangeList;
         private System.Windows.Forms.DataGridViewTextBoxColumn Seq;
         private System.Windows.Forms.DataGridViewCheckBoxColumn rowSelect;
         private System.Windows.Forms.DataGridViewTextBoxColumn IPStart;

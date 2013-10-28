@@ -12,19 +12,19 @@ namespace IPDectect.Client.Models
             set;
         }
 
-        public int PingTTLSet
+        public int TCPTime
         {
             get;
             set;
         }
 
-        public int PingResult
+        public string TCPResult
         {
             get;
             set;
         }
 
-        public int TCPPingTimes
+        public string TTLResult
         {
             get;
             set;

@@ -271,16 +271,16 @@ namespace IPDectect.Client
                 top_lblCurrentIPRetrive.Image = null;
                 top_lblHelp.Image = null;
                 top_lblLogQuery.Image = imageList1.Images[0];
+                top_lblIPScan.Image = null;
 
-                this.Panel_P1_IPRetrive.Visible = false;
-                this.Panel_P2_IPRetriving.Visible = false;
-                this.Panel_P3_route.Visible = false;
-
+                this.Panel_P4_logSearch.BringToFront();
+                //this.Panel_P1_IPRetrive.Visible = false;
+                //this.Panel_P2_IPRetriving.Visible = false;
+                //this.Panel_P3_route.Visible = false;
+                //this.Panel_P4_logSearch.Visible = true;
                 this.p4_chk_onlyNotMatched.Checked = false;
                 this.P4_lblExport.Enabled = false;
                 this.AcceptButton = this.p4_btn_GoToPage;
-
-                this.Panel_P4_logSearch.Visible = true;
 
                 if (OnLogQueryStatus != null)
                 {

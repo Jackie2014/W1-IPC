@@ -28,7 +28,19 @@ namespace IPDectect.Client.Common
             set;
         }
 
-        public int PingTTLSet
+        public int TTLFaZhiSet
+        {
+            get;
+            set;
+        }
+
+        public int TCPFaZhiSet
+        {
+            get;
+            set;
+        }
+
+        public int TCPPortSet
         {
             get;
             set;
@@ -54,8 +66,8 @@ namespace IPDectect.Client.Common
 
         public void StartIPScan()
         {
-            this.TCPPingResult = TCPPing(this.IP);
-            this.PingResult = Ping(this.IP, this.PingTTLSet);
+            this.TCPPingResult = TCPPing(this.IP,this.TCPPortSet);
+            this.PingResult = Ping(this.IP, this.TTLFaZhiSet);
         }
 
         /// <summary>
@@ -63,7 +75,7 @@ namespace IPDectect.Client.Common
         /// </summary>
         /// <param name="ip">ip</param>
         /// <returns> </returns>
-        private string TCPPing(string ip)
+        private string TCPPing(string ip,int tcpPort)
         {
             // -1 表示TCPing 异常
             string result = RESULT_FAIL;
@@ -76,7 +88,7 @@ namespace IPDectect.Client.Common
             p.StartInfo.CreateNoWindow = true;
 
             p.Start();
-            p.StandardInput.WriteLine(String.Format("{0} -n 1 -w 1 -s {1}", TCPPING_EXECUTE_FILE, ip));
+            p.StandardInput.WriteLine(String.Format("{0} -n 1 -w 1 -s {1} {2}", TCPPING_EXECUTE_FILE, ip,tcpPort));
             p.StandardInput.WriteLine("exit");
             string output = p.StandardOutput.ReadToEnd();
             p.Close();

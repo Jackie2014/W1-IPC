@@ -3,7 +3,7 @@
   <PropertyGroup>
     <StartupObject>
     </StartupObject>
-    <PublishUrl>C:\projects\异网IP检测\Client\IPDetectClient\publish\</PublishUrl>
+    <PublishUrl>C:\Users\Administrator.PC-20121118QHSX\我的文档\GitHub\W1-IPC\Release\20121028\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -13,7 +13,8 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>1</ApplicationRevision>
+    <AutorunEnabled>true</AutorunEnabled>
+    <ApplicationRevision>2</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -107,6 +108,10 @@
     </Compile>
     <Compile Include="frmLogin.Designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMain-AdminIPScan.cs">
+      <DependentUpon>frmMain.cs</DependentUpon>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmMain-IPRetrieving.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
