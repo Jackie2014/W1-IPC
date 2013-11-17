@@ -243,8 +243,8 @@ namespace IPDectect.Client
                 this.p2_btnBack.Visible = true;
                 this.p2_lblViewRouteDetail.Visible = true;
 
-                this.AcceptButton = this.p2_btnSearchagain;
-                this.CancelButton = this.p2_btnBack;
+                //this.AcceptButton = this.p2_btnSearchagain;
+                //this.CancelButton = this.p2_btnBack;
             }
         }
 
@@ -255,7 +255,7 @@ namespace IPDectect.Client
 
         private void NavigateToIPRetriveHome()
         {
-            this.AcceptButton = this.btnIPRetrive;
+            //this.AcceptButton = this.btnIPRetrive;
             this.Panel_P1_IPRetrive.BringToFront();
             //this.Panel_P1_IPRetrive.Visible = true;
             //this.Panel_P2_IPRetriving.Visible = false;
@@ -283,7 +283,7 @@ namespace IPDectect.Client
                 //this.Panel_P3_route.Visible = true;
                 //this.Panel_P4_logSearch.Visible = false;
 
-                this.CancelButton = this.p3_btn_back;
+                //this.CancelButton = this.p3_btn_back;
                 //this.p3_dvRoute.DataSource = null;
                 this.p3_dvRoute.AutoGenerateColumns = false;
                 this.p3_dvRoute.DataSource = this.CurrentRouteItems;

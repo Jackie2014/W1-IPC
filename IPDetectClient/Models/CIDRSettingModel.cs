@@ -12,6 +12,14 @@ namespace IPDetectServer.Models
             get;
             set;
         }
+
+        public bool Selected
+        {
+            get;
+            set;
+        }
+
+
         public string ID
         {
             get;

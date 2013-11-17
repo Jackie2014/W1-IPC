@@ -77,7 +77,6 @@ namespace IPDectect.Client.Common
         /// <returns> </returns>
         private string TCPPing(string ip,int tcpPort)
         {
-            // -1 表示TCPing 异常
             string result = RESULT_FAIL;
             Process p = new Process();
             p.StartInfo.FileName = "cmd.exe";
@@ -94,7 +93,7 @@ namespace IPDectect.Client.Common
             p.Close();
             p.Dispose();
 
-            // 如果网络异常
+            // 如果网络异常，{ "Socket is not connected", "/tcp -  -" };
             if (output.IndexOf(TCPPING_EXCEPTION_FLAG[0], StringComparison.OrdinalIgnoreCase) > -1
                 || output.IndexOf(TCPPING_EXCEPTION_FLAG[1], StringComparison.OrdinalIgnoreCase) > -1)
             {
@@ -114,6 +113,7 @@ namespace IPDectect.Client.Common
             }
             else
             {
+                result = RESULT_SUCCESS;
                 int pos1 = output.IndexOf("time=") + 5;
                 int pos2 = output.IndexOf("ms", pos1);
                 if (pos2 - pos1 > 1)
@@ -125,8 +125,6 @@ namespace IPDectect.Client.Common
                         this.TCPPingTimes = time;
                     }
                 }
-
-                result = RESULT_SUCCESS;
             }
 
             return result;
@@ -142,29 +140,38 @@ namespace IPDectect.Client.Common
         {
             // -1 表示Ping 异常
             string result = RESULT_FAIL;
-            Process p = new Process();
-            p.StartInfo.FileName = "cmd.exe";
-            p.StartInfo.UseShellExecute = false;
-            p.StartInfo.RedirectStandardInput = true;
-            p.StartInfo.RedirectStandardOutput = true;
-            p.StartInfo.RedirectStandardError = true;
-            p.StartInfo.CreateNoWindow = true;
 
-            p.Start();
-            p.StandardInput.WriteLine(String.Format("ping {0} -n 1 -w 500 -i {1}", ip, ttl));
-            p.StandardInput.WriteLine("exit");
-            string output = p.StandardOutput.ReadToEnd();
-            p.Close();
-            p.Dispose();
+            for (int i = 0; i < 3; i++)
+            {
+                // 如果失败，再次扫描，减少TTL误报率
+                if (result == RESULT_SUCCESS)
+                {
+                    break;
+                }
+                Process p = new Process();
+                p.StartInfo.FileName = "cmd.exe";
+                p.StartInfo.UseShellExecute = false;
+                p.StartInfo.RedirectStandardInput = true;
+                p.StartInfo.RedirectStandardOutput = true;
+                p.StartInfo.RedirectStandardError = true;
+                p.StartInfo.CreateNoWindow = true;
 
-            // 如果网络异常显示 "请求超时。"
-            if (output.IndexOf(PING_EXCEPTION_FLAG[0]) > -1 || output.IndexOf(PING_EXCEPTION_FLAG[1]) > -1)
-            {
-                result = RESULT_FAIL;
-            }
-            else
-            {
-                result = RESULT_SUCCESS;
+                p.Start();
+                p.StandardInput.WriteLine(String.Format("ping {0} -n 1 -w 500 -i {1}", ip, ttl));
+                p.StandardInput.WriteLine("exit");
+                string output = p.StandardOutput.ReadToEnd();
+                p.Close();
+                p.Dispose();
+
+                // 如果网络异常显示 "请求超时。"
+                if (output.IndexOf(PING_EXCEPTION_FLAG[0]) > -1 || output.IndexOf(PING_EXCEPTION_FLAG[1]) > -1)
+                {
+                    result = RESULT_FAIL;
+                }
+                else
+                {
+                    result = RESULT_SUCCESS;
+                }
             }
 
             return result;

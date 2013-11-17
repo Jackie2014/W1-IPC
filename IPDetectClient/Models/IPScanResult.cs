@@ -29,5 +29,11 @@ namespace IPDectect.Client.Models
             get;
             set;
         }
+
+        public int TCPFaZhi
+        {
+            get;
+            set;
+        }
     }
 }

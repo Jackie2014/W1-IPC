@@ -280,7 +280,7 @@ namespace IPDectect.Client
                 //this.Panel_P4_logSearch.Visible = true;
                 this.p4_chk_onlyNotMatched.Checked = false;
                 this.P4_lblExport.Enabled = false;
-                this.AcceptButton = this.p4_btn_GoToPage;
+               // this.AcceptButton = this.p4_btn_GoToPage;
 
                 if (OnLogQueryStatus != null)
                 {

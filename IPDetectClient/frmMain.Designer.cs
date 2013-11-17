@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.Panel_P1_IPRetrive = new System.Windows.Forms.Panel();
             this.btnIPRetrive = new System.Windows.Forms.Button();
@@ -122,10 +122,8 @@
             this.contextMenu_Exit = new System.Windows.Forms.ToolStripMenuItem();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panel_p5_adminScan = new System.Windows.Forms.Panel();
+            this.p5_chk_selectedAll = new System.Windows.Forms.CheckBox();
             this.p5_dgvIPRangeList = new System.Windows.Forms.DataGridView();
-            this.btnScan = new System.Windows.Forms.Button();
-            this.txtScanResult = new System.Windows.Forms.TextBox();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.Seq = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.rowSelect = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.IPStart = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -133,6 +131,9 @@
             this.TTLLimit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TCPTimeLimit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TCPPort = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnScan = new System.Windows.Forms.Button();
+            this.txtScanResult = new System.Windows.Forms.TextBox();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.Panel_P1_IPRetrive.SuspendLayout();
             this.Panel_P2_IPRetriving.SuspendLayout();
             this.Panel_P3_route.SuspendLayout();
@@ -652,14 +653,14 @@
             this.p3_dvRoute.AllowUserToAddRows = false;
             this.p3_dvRoute.AllowUserToDeleteRows = false;
             this.p3_dvRoute.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle25.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle25.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle25.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-            dataGridViewCellStyle25.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle25.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle25.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.p3_dvRoute.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle25;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.p3_dvRoute.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.p3_dvRoute.ColumnHeadersHeight = 40;
             this.p3_dvRoute.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.No,
@@ -673,23 +674,23 @@
             this.RouteDate,
             this.ParentUID,
             this.IPBelongTo});
-            dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle27.BackColor = System.Drawing.Color.Silver;
-            dataGridViewCellStyle27.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle27.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle27.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle27.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle27.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.p3_dvRoute.DefaultCellStyle = dataGridViewCellStyle27;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.Silver;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.p3_dvRoute.DefaultCellStyle = dataGridViewCellStyle3;
             this.p3_dvRoute.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.p3_dvRoute.Location = new System.Drawing.Point(0, 2);
             this.p3_dvRoute.Name = "p3_dvRoute";
             this.p3_dvRoute.ReadOnly = true;
             this.p3_dvRoute.RowHeadersVisible = false;
-            dataGridViewCellStyle28.BackColor = System.Drawing.Color.Gray;
-            dataGridViewCellStyle28.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle28.ForeColor = System.Drawing.Color.White;
-            this.p3_dvRoute.RowsDefaultCellStyle = dataGridViewCellStyle28;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.Gray;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
+            this.p3_dvRoute.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.p3_dvRoute.RowTemplate.Height = 23;
             this.p3_dvRoute.Size = new System.Drawing.Size(598, 269);
             this.p3_dvRoute.TabIndex = 2;
@@ -697,8 +698,8 @@
             // No
             // 
             this.No.DataPropertyName = "SeqNo";
-            dataGridViewCellStyle26.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.No.DefaultCellStyle = dataGridViewCellStyle26;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.No.DefaultCellStyle = dataGridViewCellStyle2;
             this.No.Frozen = true;
             this.No.HeaderText = "No.";
             this.No.Name = "No";
@@ -833,14 +834,14 @@
             // 
             this.p4_dvLog.AllowUserToAddRows = false;
             this.p4_dvLog.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle29.BackColor = System.Drawing.Color.Silver;
-            dataGridViewCellStyle29.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle29.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle29.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle29.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle29.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.p4_dvLog.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle29;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.Silver;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.p4_dvLog.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.p4_dvLog.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.SeqNo,
             this.CreatedDate,
@@ -850,14 +851,14 @@
             this.ClientIP,
             this.RealISP,
             this.Status});
-            dataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle30.BackColor = System.Drawing.Color.Silver;
-            dataGridViewCellStyle30.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle30.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle30.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle30.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle30.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.p4_dvLog.DefaultCellStyle = dataGridViewCellStyle30;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.Silver;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.p4_dvLog.DefaultCellStyle = dataGridViewCellStyle6;
             this.p4_dvLog.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.p4_dvLog.Location = new System.Drawing.Point(1, 24);
             this.p4_dvLog.Name = "p4_dvLog";
@@ -1215,6 +1216,7 @@
             // 
             // panel_p5_adminScan
             // 
+            this.panel_p5_adminScan.Controls.Add(this.p5_chk_selectedAll);
             this.panel_p5_adminScan.Controls.Add(this.p5_dgvIPRangeList);
             this.panel_p5_adminScan.Controls.Add(this.btnScan);
             this.panel_p5_adminScan.Controls.Add(this.txtScanResult);
@@ -1224,6 +1226,19 @@
             this.panel_p5_adminScan.Name = "panel_p5_adminScan";
             this.panel_p5_adminScan.Size = new System.Drawing.Size(598, 317);
             this.panel_p5_adminScan.TabIndex = 4;
+            // 
+            // p5_chk_selectedAll
+            // 
+            this.p5_chk_selectedAll.AutoSize = true;
+            this.p5_chk_selectedAll.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.p5_chk_selectedAll.ForeColor = System.Drawing.Color.Black;
+            this.p5_chk_selectedAll.Location = new System.Drawing.Point(5, 127);
+            this.p5_chk_selectedAll.Name = "p5_chk_selectedAll";
+            this.p5_chk_selectedAll.Size = new System.Drawing.Size(54, 23);
+            this.p5_chk_selectedAll.TabIndex = 23;
+            this.p5_chk_selectedAll.Text = "全选";
+            this.p5_chk_selectedAll.UseVisualStyleBackColor = true;
+            this.p5_chk_selectedAll.CheckedChanged += new System.EventHandler(this.p5_chk_selectedAll_CheckedChanged);
             // 
             // p5_dgvIPRangeList
             // 
@@ -1246,6 +1261,77 @@
             this.p5_dgvIPRangeList.Size = new System.Drawing.Size(593, 129);
             this.p5_dgvIPRangeList.TabIndex = 22;
             this.p5_dgvIPRangeList.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.p5_dgvIPRangeList_CellValidating);
+            // 
+            // Seq
+            // 
+            this.Seq.DataPropertyName = "Seq";
+            this.Seq.Frozen = true;
+            this.Seq.HeaderText = "No.";
+            this.Seq.MaxInputLength = 4;
+            this.Seq.Name = "Seq";
+            this.Seq.ReadOnly = true;
+            this.Seq.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Seq.Width = 35;
+            // 
+            // rowSelect
+            // 
+            this.rowSelect.DataPropertyName = "Selected";
+            this.rowSelect.Frozen = true;
+            this.rowSelect.HeaderText = "选择";
+            this.rowSelect.MinimumWidth = 50;
+            this.rowSelect.Name = "rowSelect";
+            this.rowSelect.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.rowSelect.Width = 50;
+            // 
+            // IPStart
+            // 
+            this.IPStart.DataPropertyName = "IPStart";
+            this.IPStart.Frozen = true;
+            this.IPStart.HeaderText = "IP开始";
+            this.IPStart.MaxInputLength = 15;
+            this.IPStart.MinimumWidth = 110;
+            this.IPStart.Name = "IPStart";
+            this.IPStart.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.IPStart.Width = 130;
+            // 
+            // IPEnd
+            // 
+            this.IPEnd.DataPropertyName = "IPEnd";
+            this.IPEnd.Frozen = true;
+            this.IPEnd.HeaderText = "IP结束";
+            this.IPEnd.MaxInputLength = 15;
+            this.IPEnd.MinimumWidth = 110;
+            this.IPEnd.Name = "IPEnd";
+            this.IPEnd.Width = 130;
+            // 
+            // TTLLimit
+            // 
+            this.TTLLimit.DataPropertyName = "TTLFaZhi";
+            this.TTLLimit.Frozen = true;
+            this.TTLLimit.HeaderText = "TTL阀值";
+            this.TTLLimit.MaxInputLength = 4;
+            this.TTLLimit.MinimumWidth = 60;
+            this.TTLLimit.Name = "TTLLimit";
+            this.TTLLimit.Width = 90;
+            // 
+            // TCPTimeLimit
+            // 
+            this.TCPTimeLimit.DataPropertyName = "TCPFaZhi";
+            this.TCPTimeLimit.Frozen = true;
+            this.TCPTimeLimit.HeaderText = "TCP响应时间阀值";
+            this.TCPTimeLimit.MaxInputLength = 4;
+            this.TCPTimeLimit.MinimumWidth = 100;
+            this.TCPTimeLimit.Name = "TCPTimeLimit";
+            // 
+            // TCPPort
+            // 
+            this.TCPPort.DataPropertyName = "TCPPort";
+            this.TCPPort.Frozen = true;
+            this.TCPPort.HeaderText = "TCP端口";
+            this.TCPPort.MaxInputLength = 4;
+            this.TCPPort.MinimumWidth = 60;
+            this.TCPPort.Name = "TCPPort";
+            this.TCPPort.Width = 90;
             // 
             // btnScan
             // 
@@ -1270,94 +1356,23 @@
             // 
             this.txtScanResult.BackColor = System.Drawing.SystemColors.InfoText;
             this.txtScanResult.ForeColor = System.Drawing.SystemColors.Info;
-            this.txtScanResult.Location = new System.Drawing.Point(5, 164);
+            this.txtScanResult.Location = new System.Drawing.Point(-1, 164);
             this.txtScanResult.MaxLength = 327670;
             this.txtScanResult.Multiline = true;
             this.txtScanResult.Name = "txtScanResult";
             this.txtScanResult.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtScanResult.Size = new System.Drawing.Size(593, 94);
+            this.txtScanResult.Size = new System.Drawing.Size(599, 94);
             this.txtScanResult.TabIndex = 20;
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(9, 146);
+            this.progressBar1.Location = new System.Drawing.Point(-1, 150);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(585, 11);
+            this.progressBar1.Size = new System.Drawing.Size(596, 11);
             this.progressBar1.TabIndex = 19;
-            // 
-            // Seq
-            // 
-            this.Seq.DataPropertyName = "Seq";
-            this.Seq.Frozen = true;
-            this.Seq.HeaderText = "No.";
-            this.Seq.MaxInputLength = 4;
-            this.Seq.Name = "Seq";
-            this.Seq.ReadOnly = true;
-            this.Seq.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Seq.Width = 40;
-            // 
-            // rowSelect
-            // 
-            this.rowSelect.Frozen = true;
-            this.rowSelect.HeaderText = "选择";
-            this.rowSelect.MinimumWidth = 50;
-            this.rowSelect.Name = "rowSelect";
-            this.rowSelect.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.rowSelect.Visible = false;
-            this.rowSelect.Width = 50;
-            // 
-            // IPStart
-            // 
-            this.IPStart.DataPropertyName = "IPStart";
-            this.IPStart.Frozen = true;
-            this.IPStart.HeaderText = "IP开始";
-            this.IPStart.MaxInputLength = 15;
-            this.IPStart.MinimumWidth = 110;
-            this.IPStart.Name = "IPStart";
-            this.IPStart.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.IPStart.Width = 120;
-            // 
-            // IPEnd
-            // 
-            this.IPEnd.DataPropertyName = "IPEnd";
-            this.IPEnd.Frozen = true;
-            this.IPEnd.HeaderText = "IP结束";
-            this.IPEnd.MaxInputLength = 15;
-            this.IPEnd.MinimumWidth = 110;
-            this.IPEnd.Name = "IPEnd";
-            this.IPEnd.Width = 120;
-            // 
-            // TTLLimit
-            // 
-            this.TTLLimit.DataPropertyName = "TTLFaZhi";
-            this.TTLLimit.Frozen = true;
-            this.TTLLimit.HeaderText = "TTL阀值";
-            this.TTLLimit.MaxInputLength = 4;
-            this.TTLLimit.MinimumWidth = 60;
-            this.TTLLimit.Name = "TTLLimit";
-            // 
-            // TCPTimeLimit
-            // 
-            this.TCPTimeLimit.DataPropertyName = "TCPFaZhi";
-            this.TCPTimeLimit.Frozen = true;
-            this.TCPTimeLimit.HeaderText = "TCP响应时间阀值";
-            this.TCPTimeLimit.MaxInputLength = 4;
-            this.TCPTimeLimit.MinimumWidth = 100;
-            this.TCPTimeLimit.Name = "TCPTimeLimit";
-            this.TCPTimeLimit.Width = 110;
-            // 
-            // TCPPort
-            // 
-            this.TCPPort.DataPropertyName = "TCPPort";
-            this.TCPPort.Frozen = true;
-            this.TCPPort.HeaderText = "TCP端口";
-            this.TCPPort.MaxInputLength = 4;
-            this.TCPPort.MinimumWidth = 60;
-            this.TCPPort.Name = "TCPPort";
             // 
             // frmMain
             // 
-            this.AcceptButton = this.btnIPRetrive;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.BackgroundImage = global::IPDectect.Client.Properties.Resources.back_1;
@@ -1504,5 +1519,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn TTLLimit;
         private System.Windows.Forms.DataGridViewTextBoxColumn TCPTimeLimit;
         private System.Windows.Forms.DataGridViewTextBoxColumn TCPPort;
+        private System.Windows.Forms.CheckBox p5_chk_selectedAll;
     }
 }

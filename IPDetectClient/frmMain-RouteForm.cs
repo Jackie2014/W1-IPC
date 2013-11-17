@@ -39,7 +39,7 @@ namespace IPDectect.Client
                 //this.Panel_P3_route.Visible = true;
                 //this.Panel_P4_logSearch.Visible = false;
 
-                this.CancelButton = this.p3_btn_back;
+                //this.CancelButton = this.p3_btn_back;
 
                 this.p3_dvRoute.AutoGenerateColumns = false;
                 this.p3_dvRoute.DataSource = this.CurrentRouteItems;

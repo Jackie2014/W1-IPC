@@ -636,8 +636,5 @@ namespace IPDectect.Client
             var frmSet = new frmSet();
             frmSet.Show();
         }
-
-
-
     }
 }

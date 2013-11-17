@@ -70,14 +70,32 @@ namespace IPDectect.Client
         {
             if (IsScaning())
             {
-                MessageBox.Show("当前IP地址已经在扫描中，无须再点击!");
+                MessageBox.Show("当前IP地址已经在扫描中，无须再点击!", "警告");
                 return;
             }
 
             this.txtScanResult.Clear();
             CurrentIPScanIndex = 0;
   
-            var ipSettings = this.p5_dgvIPRangeList.DataSource as List<CIDRSettingModel>;
+            var ipSettingsAll = this.p5_dgvIPRangeList.DataSource as List<CIDRSettingModel>;
+
+            var ipSettings = new  List<CIDRSettingModel>();
+            if (ipSettingsAll != null)
+            {
+                foreach (var item in ipSettingsAll)
+                {
+                    if (item.Selected)
+                    {
+                        ipSettings.Add(item);
+                    }
+                }
+            }
+            
+            if(ipSettings == null || ipSettings.Count == 0)
+            {
+                MessageBox.Show("请选择需要扫描的IP地址!","警告");
+                return;
+            }
 
             sbScanResult = new StringBuilder();
 
@@ -157,7 +175,8 @@ namespace IPDectect.Client
                             IP = ipList[i].IP,
                             TTLResult = ipList[i].PingResult,
                             TCPResult = ipList[i].TCPPingResult,
-                            TCPTime = ipList[i].TCPPingTimes
+                            TCPTime = ipList[i].TCPPingTimes,
+                            TCPFaZhi = ipList[i].TCPFaZhiSet
                         };
                       
                         uploadList.Add(r);
@@ -185,7 +204,41 @@ namespace IPDectect.Client
 
                 }
 
+                // 計算TCP 響應時間的平均值
+                int tcpResponseTimeAvg = 0;
+                int tcpResponseTimeTotal = 0;
+                int tcpNormalCount = 0;
+                foreach (var item in uploadList)
+                {
+                    if (item.TCPResult == "正常" && item.TCPTime > 0)
+                    {
+                        tcpResponseTimeTotal += item.TCPTime;
+                        tcpNormalCount++;
+                    }
+                }
+
+                if (tcpResponseTimeTotal > 0 && tcpNormalCount > 0)
+                {
+                    tcpResponseTimeAvg = Convert.ToInt32(tcpResponseTimeTotal / tcpNormalCount);
+                }
+
+                // 判断TCP响应时间是否超过阀值,如果超过设为异常
+                if (tcpResponseTimeAvg > 0)
+                {
+                    foreach (var item in uploadList)
+                    {
+                        if (item.TCPResult == "正常" && item.TCPTime > 0)
+                        {
+                            if (AbsolutValue(item.TCPTime, tcpResponseTimeAvg) > item.TCPFaZhi)
+                            {
+                                item.TCPResult = "异常";
+                            }
+                        }
+                    }
+                }
+
                 string uploadResponse = CIDRSettingBiz.UploadIPScanResults(uploadList);
+
                 if (!String.IsNullOrEmpty(uploadResponse))
                 {
                     OnIPScanProgress(uploadList.Count, uploadList.Count, uploadResponse + "\r\n", false);
@@ -197,6 +250,17 @@ namespace IPDectect.Client
             }
         }
 
+        private int AbsolutValue(int v1, int v2)
+        {
+            if (v1 >= v2)
+            {
+                return v1 - v2;
+            }
+            else
+            {
+                return v2 - v1;
+            }
+        }
         private void UpdateUIProgressForIPScan(int currentValue, int maxValue, string message, bool append)
         {
             this.progressBar1.Maximum = maxValue;
@@ -229,9 +293,9 @@ namespace IPDectect.Client
 
         private void p5_dgvIPRangeList_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
-            int cellIndex = e.ColumnIndex;
-            int rowIndex = e.RowIndex;
-            int cell = 0;
+            //int cellIndex = e.ColumnIndex;
+            //int rowIndex = e.RowIndex;
+            //int cell = 0;
         }
 
         private bool IsScaning()
@@ -263,5 +327,25 @@ namespace IPDectect.Client
 
             return result;
         }
+
+        private void p5_chk_selectedAll_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.p5_dgvIPRangeList.Rows == null || this.p5_dgvIPRangeList.Rows.Count == 0)
+            {
+                return;
+            }
+
+            bool ischecked = this.p5_chk_selectedAll.Checked;
+            
+            for (int i=0; i<this.p5_dgvIPRangeList.Rows.Count; i++)
+            {
+                if (p5_dgvIPRangeList.Rows[i].Cells[1] != null)
+                {
+
+                    p5_dgvIPRangeList.Rows[i].Cells[1].Value = ischecked;
+                }
+            }
+        }
+
     }
 }
