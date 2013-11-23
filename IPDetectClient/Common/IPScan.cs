@@ -46,6 +46,12 @@ namespace IPDectect.Client.Common
             set;
         }
 
+        public string[] ExceptionKeys
+        {
+            get;
+            set;
+        }
+
         public string PingResult
         {
             get;

@@ -86,6 +86,7 @@
     <Compile Include="Business\CIDRSettingBiz.cs" />
     <Compile Include="Common\CSVExport.cs" />
     <Compile Include="Common\DataManager.cs" />
+    <Compile Include="Common\IPConverter.cs" />
     <Compile Include="Common\IPScan.cs" />
     <Compile Include="Common\JsonSharp.cs" />
     <Compile Include="Common\ModifyRegistry.cs" />
@@ -131,12 +132,6 @@
     <Compile Include="frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmScan.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmScan.Designer.cs">
-      <DependentUpon>frmScan.cs</DependentUpon>
-    </Compile>
     <Compile Include="Models\CIDRSettingModel.cs" />
     <Compile Include="Models\ClientIPResponse.cs" />
     <Compile Include="Models\ClientIPViewModel.cs" />
@@ -166,9 +161,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmScan.resx">
-      <DependentUpon>frmScan.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

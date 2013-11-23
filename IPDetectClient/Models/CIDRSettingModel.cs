@@ -38,6 +38,18 @@ namespace IPDetectServer.Models
             set;
         }
 
+        public long IPStartNum
+        {
+            get;
+            set;
+        }
+
+        public long IPEndNum
+        {
+            get;
+            set;
+        }
+
         public int TCPPort
         {
             get;
@@ -51,6 +63,12 @@ namespace IPDetectServer.Models
         }
 
         public int TTLFaZhi
+        {
+            get;
+            set;
+        }
+
+        public string TTLExceptionKeys
         {
             get;
             set;

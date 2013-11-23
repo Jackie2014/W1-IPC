@@ -36,7 +36,6 @@ namespace IPDectect.Client
 
         private void btnScan_Click(object sender, EventArgs e)
         {
-
             var ipSettings = CIDRSettingBiz.GetCIDRSettings();
     
             sbScanResult = new StringBuilder();
