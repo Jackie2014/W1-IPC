@@ -562,8 +562,6 @@ namespace IPDectect.Client
             this.Hide();
         }
 
-
-
         private void top_lblHelp_Click(object sender, EventArgs e)
         {
             try

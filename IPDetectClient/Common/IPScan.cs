@@ -13,8 +13,9 @@ namespace IPDectect.Client.Common
         private static List<string> TCPPING_EXCEPTION_FLAG = new List<string> { "Socket is not connected", "/tcp -  -" };
         private static List<string> PING_EXCEPTION_FLAG = new List<string> { "请求超时", "Request timed out." };
         private static string TCPPING_EXECUTE_FILE = AppDomain.CurrentDomain.BaseDirectory + "tcping.exe";
-        private const string RESULT_FAIL = "异常";
-        private const string RESULT_SUCCESS = "正常";
+        public const string RESULT_FAIL = "异常";
+        public const string RESULT_SUCCESS = "正常";
+        public const string RESULT_TIMEOUT = "超时";
         public IPScan()
         {
             PingResult = RESULT_FAIL;
@@ -100,10 +101,11 @@ namespace IPDectect.Client.Common
             p.Dispose();
 
             // 如果网络异常，{ "Socket is not connected", "/tcp -  -" };
+            // 如果TCP超时，则忽略，认为正常
             if (output.IndexOf(TCPPING_EXCEPTION_FLAG[0], StringComparison.OrdinalIgnoreCase) > -1
                 || output.IndexOf(TCPPING_EXCEPTION_FLAG[1], StringComparison.OrdinalIgnoreCase) > -1)
             {
-                result = RESULT_FAIL;
+                result = RESULT_TIMEOUT;
 
                 int pos1 = output.IndexOf("time=") + 5;
                 int pos2 = output.IndexOf("ms", pos1);

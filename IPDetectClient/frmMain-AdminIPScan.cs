@@ -27,9 +27,10 @@ namespace IPDectect.Client
         private const string MESSAGE_OUTPUT = "{0}-扫描IP: {1}, 第{2}个/共{3}个。  {4} 扫描结果: {5}。其中TCP Ping({6}ms) - {7}；TTL Ping - {8}。\r\n";
         private StringBuilder sbScanResult = new StringBuilder();
         //private long LastUploadIPNum = 0;
-        private int LastIPCountInLastThread = 255;
+       
         private long NextScanStartIPNum = 0;
         private const int SCAN_COUNT_PER_THREAD = 255;
+        private int LastIPCountInLastThread = SCAN_COUNT_PER_THREAD;
         private bool IsCancelScanThread = false;
         private int HaveScanedIPTotal = 0;
         private List<CIDRSettingModel> CIDRSettingsForScan = new List<CIDRSettingModel>();
@@ -87,8 +88,12 @@ namespace IPDectect.Client
                 {
                     if(thread != null && thread.IsAlive)
                     {
-                        thread.Abort();
-                        thread.Join();
+                        try
+                        {
+                            thread.Abort();
+                            thread.Join();
+                        }
+                        catch { }
                     }
                 }
             }
@@ -128,6 +133,7 @@ namespace IPDectect.Client
                 this.IsCancelScanThread = false;
                 this.lblScanedIPCount.Text = "0";
                 this.lblScanElasped.Text = "0";
+     
                 if (IsScaning())
                 {
                     MessageBox.Show("当前IP地址已经在扫描中，无须再点击!", "警告");
@@ -135,9 +141,9 @@ namespace IPDectect.Client
                 }
 
                 string startIP = DataManager.Read(Constants.SEPARATE_NextScanStartIP);
-                if(!String.IsNullOrEmpty(startIP))
+                if (!String.IsNullOrEmpty(startIP))
                 {
-                    string message = String.Format("上次扫描的最后地址是:{0},您需要从该IP地址继续吗?\r\n是:从该IP-{0}开始扫描,\r\n否:从头开始扫描。", startIP);
+                    string message = String.Format("上次扫描的最后IP地址是:{0},您需要从{0}继续吗?", startIP);
                     if (MessageBox.Show(message, "提示", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
                         NextScanStartIPNum = IPConverter.ip2long(startIP) + 1;
@@ -145,6 +151,7 @@ namespace IPDectect.Client
                     else
                     {
                         NextScanStartIPNum = 0;
+                        DataManager.Save(Constants.SEPARATE_NextScanStartIP, "");
                     }
                 }
 
@@ -160,9 +167,9 @@ namespace IPDectect.Client
                 {
                     return;
                 }
-
+                
                 LastIPCountInLastThread = SCAN_COUNT_PER_THREAD;
-                Thread thread =new Thread(new ThreadStart(MultiThreadExecute));
+                Thread thread = new Thread(new ThreadStart(MultiThreadExecute));
                 thread.Start();
             }
             catch (Exception ex)
@@ -203,9 +210,9 @@ namespace IPDectect.Client
             };
 
             // 执行完毕
-            this.IsCancelScanThread = true;
-            this.btnScan.Enabled = true;
-            this.btnScanStop.Enabled = false;
+            //this.IsCancelScanThread = true;
+            //this.btnScan.Enabled = true;
+            //this.btnScanStop.Enabled = false;
         }
 
         private List<IPScan> GetScanIPListPerThread()
@@ -294,11 +301,12 @@ namespace IPDectect.Client
 
                         if (OnIPScanProgress != null)
                         {
-                            string scanResult = "异常";
+                            string scanResult = IPScan.RESULT_FAIL;
 
-                            if (ipList[i].TCPPingResult == "正常" && ipList[i].PingResult == "正常")
+                            if ((ipList[i].TCPPingResult == IPScan.RESULT_SUCCESS || ipList[i].TCPPingResult == IPScan.RESULT_TIMEOUT)
+                                && ipList[i].PingResult == IPScan.RESULT_SUCCESS)
                             {
-                                scanResult = "正常";
+                                scanResult = IPScan.RESULT_SUCCESS;
                                 //validCount++;
                             }
                             //{0}-扫描结果: TCP Ping({1}ms) - {2}；ICMP Ping - {3}。\r\n
@@ -317,7 +325,7 @@ namespace IPDectect.Client
                 int tcpNormalCount = 0;
                 foreach (var item in scanList)
                 {
-                    if (item.TCPResult == "正常" && item.TCPTime > 0)
+                    if (item.TCPResult == IPScan.RESULT_SUCCESS && item.TCPTime > 0)
                     {
                         tcpResponseTimeTotal += item.TCPTime;
                         tcpNormalCount++;
@@ -334,11 +342,11 @@ namespace IPDectect.Client
                 {
                     foreach (var item in scanList)
                     {
-                        if (item.TCPResult == "正常" && item.TCPTime > 0)
+                        if (item.TCPResult == IPScan.RESULT_SUCCESS && item.TCPTime > 0)
                         {
                             if (AbsolutValue(item.TCPTime, tcpResponseTimeAvg) > item.TCPFaZhi)
                             {
-                                item.TCPResult = "异常";
+                                item.TCPResult = IPScan.RESULT_FAIL;
                             }
                         }
                     }
@@ -346,7 +354,7 @@ namespace IPDectect.Client
 
                 foreach (var item in scanList)
                 {
-                    if (item.TCPResult == "异常" || item.TTLResult == "异常")
+                    if (item.TCPResult == IPScan.RESULT_FAIL || item.TTLResult == IPScan.RESULT_FAIL)
                     {
                         exceptionIPList.Add(item);
                     }
@@ -369,7 +377,7 @@ namespace IPDectect.Client
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                //MessageBox.Show(ex.Message);
             }
         }
 
@@ -429,10 +437,23 @@ namespace IPDectect.Client
             Thread result = null;
             for(int i = 0; i < IPScanTreads.Length;i++)
             {
+                //if (IPScanTreads[i] == null)
+                //{
+                //    IPScanTreads[i] = new Thread(new ParameterizedThreadStart(IPScanProcess));
+                //    result = IPScanTreads[i];
+                //    break;
+                //}
+                //else if (IPScanTreads[i] != null && !IPScanTreads[i].IsAlive)
+                //{
+                //    result = IPScanTreads[i];
+                //    break;
+                //}
+
                 if (IPScanTreads[i] == null || !IPScanTreads[i].IsAlive)
                 {
                     IPScanTreads[i] = new Thread(new ParameterizedThreadStart(IPScanProcess));
                     result = IPScanTreads[i];
+                    break;
                 }
             }
 
