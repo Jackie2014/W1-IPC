@@ -144,7 +144,6 @@ namespace IPDectect.Client.Common
         /// <returns></returns>
         private string Ping(string ip, int ttl)
         {
-            // -1 表示Ping 异常
             string result = RESULT_FAIL;
 
             for (int i = 0; i < 3; i++)
@@ -154,6 +153,7 @@ namespace IPDectect.Client.Common
                 {
                     break;
                 }
+
                 Process p = new Process();
                 p.StartInfo.FileName = "cmd.exe";
                 p.StartInfo.UseShellExecute = false;
@@ -169,8 +169,24 @@ namespace IPDectect.Client.Common
                 p.Close();
                 p.Dispose();
 
+
+                if (ExceptionKeys != null && ExceptionKeys.Length > 0)
+                {
+                    foreach (string s in ExceptionKeys)
+                    {
+                        if (!String.IsNullOrEmpty(s))
+                        {
+                            if (output.IndexOf(s, StringComparison.OrdinalIgnoreCase) > -1)
+                            {
+                                result = RESULT_FAIL;
+                                break;
+                            }
+                        }
+
+                    }
+                }
                 // 如果网络异常显示 "请求超时。"
-                if (output.IndexOf(PING_EXCEPTION_FLAG[0]) > -1 || output.IndexOf(PING_EXCEPTION_FLAG[1]) > -1)
+                else if (output.IndexOf(PING_EXCEPTION_FLAG[0]) > -1 || output.IndexOf(PING_EXCEPTION_FLAG[1]) > -1)
                 {
                     result = RESULT_FAIL;
                 }

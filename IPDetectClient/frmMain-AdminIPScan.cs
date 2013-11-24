@@ -22,13 +22,15 @@ namespace IPDectect.Client
         private event IPScanProgress OnIPScanProgress;
         private static Thread[] IPScanTreads = new Thread[5];
         //private static int CurrentIPScanIndex = 0;
-        private const string MESSAGE_OUTPUT1 = "{0}-正在扫描IP: {1}, 第{2}个/共{3}个。\r\n";
-        private const string MESSAGE_OUTPUT2 = "{0}-扫描结果: {1}。其中TCP Ping({2}ms) - {3}；TTL Ping - {4}。\r\n";
+        //private const string MESSAGE_OUTPUT1 = "{0}-正在扫描IP: {1}, 第{2}个/共{3}个。\r\n";
+        //private const string MESSAGE_OUTPUT2 = "{0}-扫描结果: {1}。其中TCP Ping({2}ms) - {3}；TTL Ping - {4}。\r\n";
+        private const string MESSAGE_OUTPUT = "{0}-扫描IP: {1}, 第{2}个/共{3}个。  {4} 扫描结果: {5}。其中TCP Ping({6}ms) - {7}；TTL Ping - {8}。\r\n";
         private StringBuilder sbScanResult = new StringBuilder();
-        private long LastUploadIPNum = 0;
-        private int LastIPCountInLastThread = 100;
+        //private long LastUploadIPNum = 0;
+        private int LastIPCountInLastThread = 255;
         private long NextScanStartIPNum = 0;
-        private const int SCAN_COUNT_PER_THREAD = 100;
+        private const int SCAN_COUNT_PER_THREAD = 255;
+        private bool IsCancelScanThread = false;
         private int HaveScanedIPTotal = 0;
         private List<CIDRSettingModel> CIDRSettingsForScan = new List<CIDRSettingModel>();
         private DateTime ScanStartTime = DateTime.Now;
@@ -73,55 +75,106 @@ namespace IPDectect.Client
             }
         }
 
-        private void btnScan_Click(object sender, EventArgs e)
+        private void btnScanStop_Click(object sender, EventArgs e)
         {
-            if (IsScaning())
+            try
             {
-                MessageBox.Show("当前IP地址已经在扫描中，无须再点击!", "警告");
-                return;
-            }
-
-            this.txtScanResult.Clear();
-            HaveScanedIPTotal = 0;
-            ScanStartTime = DateTime.Now;
-            this.CIDRSettingsForScan.Clear();
-
-            int threadLimit = Convert.ToInt32(this.tab5_threadLimit.Value);
-            IPScanTreads = new Thread[threadLimit];
-
-            var ipSettingsAll = this.p5_dgvIPRangeList.DataSource as List<CIDRSettingModel>;
-
-            var ipSettings = new  List<CIDRSettingModel>();
-            if (ipSettingsAll != null)
-            {
-                foreach (var item in ipSettingsAll)
+                this.btnScanStop.Enabled = false;
+                this.btnScan.Enabled = true;
+                IsCancelScanThread = true;
+                // 终止所有线程
+                foreach (var thread in IPScanTreads)
                 {
-                    if (item.Selected)
+                    if(thread != null && thread.IsAlive)
                     {
-                        CIDRSettingsForScan.Add(item);
+                        thread.Abort();
+                        thread.Join();
                     }
                 }
             }
-
-            if (CIDRSettingsForScan == null || CIDRSettingsForScan.Count == 0)
+            catch (Exception ex)
             {
-                MessageBox.Show("请选择需要扫描的IP地址!","警告");
-                return;
+                MessageBox.Show(ex.Message, "错误");
             }
-
-            sbScanResult = new StringBuilder();
-
-            if (CIDRSettingsForScan == null || CIDRSettingsForScan.Count == 0)
+        }
+        private void btnScan_Click(object sender, EventArgs e)
+        {
+            try
             {
-                return;
-            }
+                this.CIDRSettingsForScan.Clear();
+                var ipSettingsAll = this.p5_dgvIPRangeList.DataSource as List<CIDRSettingModel>;
 
-            Thread thread = new Thread(new ThreadStart(MultiThreadExecute));
-            thread.Start();
+                var ipSettings = new List<CIDRSettingModel>();
+                if (ipSettingsAll != null)
+                {
+                    foreach (var item in ipSettingsAll)
+                    {
+                        if (item.Selected)
+                        {
+                            CIDRSettingsForScan.Add(item);
+                        }
+                    }
+                }
+
+                if (CIDRSettingsForScan == null || CIDRSettingsForScan.Count == 0)
+                {
+                    MessageBox.Show("请选择需要扫描的IP地址!", "警告");
+                    return;
+                }
+
+
+                this.btnScan.Enabled = false;
+                this.btnScanStop.Enabled = true;
+                this.IsCancelScanThread = false;
+                this.lblScanedIPCount.Text = "0";
+                this.lblScanElasped.Text = "0";
+                if (IsScaning())
+                {
+                    MessageBox.Show("当前IP地址已经在扫描中，无须再点击!", "警告");
+                    return;
+                }
+
+                string startIP = DataManager.Read(Constants.SEPARATE_NextScanStartIP);
+                if(!String.IsNullOrEmpty(startIP))
+                {
+                    string message = String.Format("上次扫描的最后地址是:{0},您需要从该IP地址继续吗?\r\n是:从该IP-{0}开始扫描,\r\n否:从头开始扫描。", startIP);
+                    if (MessageBox.Show(message, "提示", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
+                        NextScanStartIPNum = IPConverter.ip2long(startIP) + 1;
+                    }
+                    else
+                    {
+                        NextScanStartIPNum = 0;
+                    }
+                }
+
+                this.txtScanResult.Clear();
+                HaveScanedIPTotal = 0;
+                ScanStartTime = DateTime.Now;
+                int threadLimit = Convert.ToInt32(this.tab5_threadLimit.Value);
+                IPScanTreads = new Thread[threadLimit];
+
+                sbScanResult = new StringBuilder();
+
+                if (CIDRSettingsForScan == null || CIDRSettingsForScan.Count == 0)
+                {
+                    return;
+                }
+
+                LastIPCountInLastThread = SCAN_COUNT_PER_THREAD;
+                Thread thread =new Thread(new ThreadStart(MultiThreadExecute));
+                thread.Start();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message,"错误");
+            }
         }
 
         private void MultiThreadExecute()
         {
+            if (IsCancelScanThread) return;
+
             if (CIDRSettingsForScan == null || CIDRSettingsForScan.Count == 0)
             {
                 return;
@@ -136,6 +189,8 @@ namespace IPDectect.Client
                 t = GetThreadFromPool();
                 if (t == null)
                 {
+                    if (IsCancelScanThread)
+                        break;
                     // 如果没有空闲的线程，等待1秒
                     Thread.Sleep(1000);
                 }
@@ -146,6 +201,11 @@ namespace IPDectect.Client
                     t.Start(ipScanList);
                 }
             };
+
+            // 执行完毕
+            this.IsCancelScanThread = true;
+            this.btnScan.Enabled = true;
+            this.btnScanStop.Enabled = false;
         }
 
         private List<IPScan> GetScanIPListPerThread()
@@ -191,6 +251,10 @@ namespace IPDectect.Client
                         NextScanStartIPNum = ipNum;
                         break;
                     }
+                    else
+                    {
+                        NextScanStartIPNum = 0;
+                    }
                 }
 
                 LastIPCountInLastThread = result.Count;
@@ -203,22 +267,16 @@ namespace IPDectect.Client
             try
             {
                 DateTime begin = DateTime.Now;
-                var uploadList = new List<IPScanResult>();
-
+                var scanList = new List<IPScanResult>();
+                var exceptionIPList = new List<IPScanResult>();
                 if (oipList != null && oipList is List<IPScan>)
                 {
                     List<IPScan> ipList = oipList as List<IPScan>;
                     int ipCount = ipList.Count;
-                    int validCount = 0;
+                    //int validCount = 0;
                     for (int i = 0; i < ipCount; i++)
                     {
-                        if (OnIPScanProgress != null)
-                        {
-                            //{0}-正在扫描IP: {1}, 第{2}个/共{3}个。
-                            string s = String.Format(MESSAGE_OUTPUT1, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ipList[i].IP, i + 1, ipCount);
-                            OnIPScanProgress(i, ipCount, s);
-                        }
-
+                        DateTime dt1 = DateTime.Now;
                         ipList[i].StartIPScan();
 
                         IPScanResult r = new IPScanResult
@@ -229,8 +287,9 @@ namespace IPDectect.Client
                             TCPTime = ipList[i].TCPPingTimes,
                             TCPFaZhi = ipList[i].TCPFaZhiSet
                         };
-                      
-                        uploadList.Add(r);
+
+                        scanList.Add(r);
+
                         HaveScanedIPTotal++;
 
                         if (OnIPScanProgress != null)
@@ -240,27 +299,23 @@ namespace IPDectect.Client
                             if (ipList[i].TCPPingResult == "正常" && ipList[i].PingResult == "正常")
                             {
                                 scanResult = "正常";
-                                validCount++;
+                                //validCount++;
                             }
                             //{0}-扫描结果: TCP Ping({1}ms) - {2}；ICMP Ping - {3}。\r\n
-                            string s = String.Format(MESSAGE_OUTPUT2, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), scanResult, ipList[i].TCPPingTimes, ipList[i].TCPPingResult, ipList[i].PingResult);
+                            //  "{0}-扫描IP: {1}, 第{2}个/共{3}个。  {4} 扫描结果: {5}。其中TCP Ping({6}ms) - {7}；TTL Ping - {8}。\r\n";
+                            string s = String.Format(MESSAGE_OUTPUT, dt1.ToString("yyyy-MM-dd HH:mm:ss"), ipList[i].IP,i + 1, ipCount,
+                                DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),scanResult, 
+                                ipList[i].TCPPingTimes, ipList[i].TCPPingResult, ipList[i].PingResult);
                             OnIPScanProgress(i + 1, ipCount, s);
-
-                            if (ipCount == i + 1)
-                            {
-                                long totalTimes = Convert.ToInt64((DateTime.Now - begin).TotalSeconds);
-                                OnIPScanProgress(i + 1, ipCount, String.Format("{0}-扫描完毕，共扫描{1}个IP,其中{2}个正常，{3}个异常，总耗时 {4} 秒。\r\n", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), ipCount, validCount, ipCount - validCount, totalTimes));
-                            }
                         }
                     }
-
                 }
 
                 // 計算TCP 響應時間的平均值
                 int tcpResponseTimeAvg = 0;
                 int tcpResponseTimeTotal = 0;
                 int tcpNormalCount = 0;
-                foreach (var item in uploadList)
+                foreach (var item in scanList)
                 {
                     if (item.TCPResult == "正常" && item.TCPTime > 0)
                     {
@@ -277,7 +332,7 @@ namespace IPDectect.Client
                 // 判断TCP响应时间是否超过阀值,如果超过设为异常
                 if (tcpResponseTimeAvg > 0)
                 {
-                    foreach (var item in uploadList)
+                    foreach (var item in scanList)
                     {
                         if (item.TCPResult == "正常" && item.TCPTime > 0)
                         {
@@ -289,11 +344,27 @@ namespace IPDectect.Client
                     }
                 }
 
-                string uploadResponse = CIDRSettingBiz.UploadIPScanResults(uploadList);
+                foreach (var item in scanList)
+                {
+                    if (item.TCPResult == "异常" || item.TTLResult == "异常")
+                    {
+                        exceptionIPList.Add(item);
+                    }
+                }
+
+                string uploadResponse = CIDRSettingBiz.UploadIPScanResults(exceptionIPList);
+
+                // 记录最后的IP地址,万一关机或意外，下次扫描从该IP继续，不要从头再开始
+                try
+                {
+                    DataManager.Save(Constants.SEPARATE_NextScanStartIP, scanList[scanList.Count - 1].IP);
+                }
+                catch
+                { }
 
                 if (!String.IsNullOrEmpty(uploadResponse))
                 {
-                    OnIPScanProgress(uploadList.Count, uploadList.Count, uploadResponse + "\r\n");
+                    OnIPScanProgress(scanList.Count, scanList.Count, uploadResponse + "\r\n");
                 }
             }
             catch (Exception ex)
@@ -332,27 +403,6 @@ namespace IPDectect.Client
             this.lblScanElasped.Text = String.Format("{0}:{1}:{2}", ts.Hours, ts.Minutes, ts.Seconds);
         }
 
-        //private void p5_dgvIPRangeList_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
-        //{
-        //    DataGridView dgv = (DataGridView)sender;
-        //    if (dgv[0, e.RowIndex].Value == "2")
-        //    {
-        //        e.Cancel = true;
-        //    }
-        //    else
-        //    {
-        //        e.Cancel = false;
-        //    }
-        //}
-
-
-        private void p5_dgvIPRangeList_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
-        {
-            //int cellIndex = e.ColumnIndex;
-            //int rowIndex = e.RowIndex;
-            //int cell = 0;
-        }
-
         private bool IsScaning()
         {
             lock (this)
@@ -373,6 +423,9 @@ namespace IPDectect.Client
 
         private Thread GetThreadFromPool()
         {
+            if (IsCancelScanThread)
+                return null;
+
             Thread result = null;
             for(int i = 0; i < IPScanTreads.Length;i++)
             {

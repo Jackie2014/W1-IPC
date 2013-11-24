@@ -21,6 +21,7 @@ namespace IPDectect.Client.Common
         public const string SEPARATE_CHAR_CONDITION = "======Query Condition======";
         public const string SEPARATE_REMEMBER_ME = "======RememberMe======";
         public const string SEPARATE_StartRunSet = "======StartRunSet======";
+        public const string SEPARATE_NextScanStartIP = "======NextScanStartIP======";
         public const int PAGE_SIZE = 10;
 
         public static string LocalDataPath

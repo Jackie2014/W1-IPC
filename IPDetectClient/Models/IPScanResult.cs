@@ -35,5 +35,11 @@ namespace IPDectect.Client.Models
             get;
             set;
         }
+
+        public string ClientIP
+        {
+            get;
+            set;
+        }
     }
 }

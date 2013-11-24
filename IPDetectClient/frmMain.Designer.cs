@@ -122,6 +122,10 @@
             this.contextMenu_Exit = new System.Windows.Forms.ToolStripMenuItem();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panel_p5_adminScan = new System.Windows.Forms.Panel();
+            this.btnScanStop = new System.Windows.Forms.Button();
+            this.btnScan = new System.Windows.Forms.Button();
+            this.lblScanElasped = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.lblScanedIPCount = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.tab5_threadLimit = new System.Windows.Forms.NumericUpDown();
@@ -135,11 +139,8 @@
             this.TTLLimit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TCPTimeLimit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TCPPort = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnScan = new System.Windows.Forms.Button();
             this.txtScanResult = new System.Windows.Forms.TextBox();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.label11 = new System.Windows.Forms.Label();
-            this.lblScanElasped = new System.Windows.Forms.Label();
             this.Panel_P1_IPRetrive.SuspendLayout();
             this.Panel_P2_IPRetriving.SuspendLayout();
             this.Panel_P3_route.SuspendLayout();
@@ -1223,6 +1224,8 @@
             // 
             // panel_p5_adminScan
             // 
+            this.panel_p5_adminScan.Controls.Add(this.btnScanStop);
+            this.panel_p5_adminScan.Controls.Add(this.btnScan);
             this.panel_p5_adminScan.Controls.Add(this.lblScanElasped);
             this.panel_p5_adminScan.Controls.Add(this.label11);
             this.panel_p5_adminScan.Controls.Add(this.lblScanedIPCount);
@@ -1231,20 +1234,62 @@
             this.panel_p5_adminScan.Controls.Add(this.label9);
             this.panel_p5_adminScan.Controls.Add(this.p5_chk_selectedAll);
             this.panel_p5_adminScan.Controls.Add(this.p5_dgvIPRangeList);
-            this.panel_p5_adminScan.Controls.Add(this.btnScan);
             this.panel_p5_adminScan.Controls.Add(this.txtScanResult);
             this.panel_p5_adminScan.Controls.Add(this.progressBar1);
             this.panel_p5_adminScan.ForeColor = System.Drawing.Color.Transparent;
-            this.panel_p5_adminScan.Location = new System.Drawing.Point(1, 57);
+            this.panel_p5_adminScan.Location = new System.Drawing.Point(0, 57);
             this.panel_p5_adminScan.Name = "panel_p5_adminScan";
             this.panel_p5_adminScan.Size = new System.Drawing.Size(598, 317);
             this.panel_p5_adminScan.TabIndex = 4;
+            // 
+            // btnScanStop
+            // 
+            this.btnScanStop.Enabled = false;
+            this.btnScanStop.ForeColor = System.Drawing.Color.Black;
+            this.btnScanStop.Location = new System.Drawing.Point(287, 276);
+            this.btnScanStop.Name = "btnScanStop";
+            this.btnScanStop.Size = new System.Drawing.Size(95, 29);
+            this.btnScanStop.TabIndex = 31;
+            this.btnScanStop.Text = "停止扫描";
+            this.btnScanStop.UseVisualStyleBackColor = true;
+            this.btnScanStop.Click += new System.EventHandler(this.btnScanStop_Click);
+            // 
+            // btnScan
+            // 
+            this.btnScan.ForeColor = System.Drawing.Color.Black;
+            this.btnScan.Location = new System.Drawing.Point(159, 276);
+            this.btnScan.Name = "btnScan";
+            this.btnScan.Size = new System.Drawing.Size(95, 29);
+            this.btnScan.TabIndex = 30;
+            this.btnScan.Text = "开始扫描";
+            this.btnScan.UseVisualStyleBackColor = true;
+            this.btnScan.Click += new System.EventHandler(this.btnScan_Click);
+            // 
+            // lblScanElasped
+            // 
+            this.lblScanElasped.AutoSize = true;
+            this.lblScanElasped.ForeColor = System.Drawing.Color.DarkRed;
+            this.lblScanElasped.Location = new System.Drawing.Point(523, 292);
+            this.lblScanElasped.Name = "lblScanElasped";
+            this.lblScanElasped.Size = new System.Drawing.Size(18, 20);
+            this.lblScanElasped.TabIndex = 29;
+            this.lblScanElasped.Text = "0";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.ForeColor = System.Drawing.Color.Black;
+            this.label11.Location = new System.Drawing.Point(416, 291);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(113, 20);
+            this.label11.TabIndex = 28;
+            this.label11.Text = "已耗时(时分秒):";
             // 
             // lblScanedIPCount
             // 
             this.lblScanedIPCount.AutoSize = true;
             this.lblScanedIPCount.ForeColor = System.Drawing.Color.DarkRed;
-            this.lblScanedIPCount.Location = new System.Drawing.Point(520, 264);
+            this.lblScanedIPCount.Location = new System.Drawing.Point(523, 264);
             this.lblScanedIPCount.Name = "lblScanedIPCount";
             this.lblScanedIPCount.Size = new System.Drawing.Size(18, 20);
             this.lblScanedIPCount.TabIndex = 27;
@@ -1262,7 +1307,7 @@
             // 
             // tab5_threadLimit
             // 
-            this.tab5_threadLimit.Location = new System.Drawing.Point(118, 276);
+            this.tab5_threadLimit.Location = new System.Drawing.Point(8, 285);
             this.tab5_threadLimit.Maximum = new decimal(new int[] {
             10,
             0,
@@ -1286,7 +1331,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.ForeColor = System.Drawing.Color.Black;
-            this.label9.Location = new System.Drawing.Point(3, 278);
+            this.label9.Location = new System.Drawing.Point(4, 264);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(114, 20);
             this.label9.TabIndex = 24;
@@ -1325,7 +1370,7 @@
             this.p5_dgvIPRangeList.ShowCellErrors = false;
             this.p5_dgvIPRangeList.Size = new System.Drawing.Size(593, 129);
             this.p5_dgvIPRangeList.TabIndex = 22;
-            this.p5_dgvIPRangeList.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.p5_dgvIPRangeList_CellValidating);
+            
             // 
             // Seq
             // 
@@ -1398,25 +1443,6 @@
             this.TCPPort.Name = "TCPPort";
             this.TCPPort.Width = 90;
             // 
-            // btnScan
-            // 
-            this.btnScan.BackColor = System.Drawing.Color.Transparent;
-            this.btnScan.BackgroundImage = global::IPDectect.Client.Properties.Resources.btn5_正常;
-            this.btnScan.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnScan.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnScan.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
-            this.btnScan.FlatAppearance.BorderSize = 0;
-            this.btnScan.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnScan.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnScan.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnScan.Location = new System.Drawing.Point(189, 265);
-            this.btnScan.Name = "btnScan";
-            this.btnScan.Size = new System.Drawing.Size(120, 40);
-            this.btnScan.TabIndex = 21;
-            this.btnScan.Text = "TCP/TTL 扫描";
-            this.btnScan.UseVisualStyleBackColor = false;
-            this.btnScan.Click += new System.EventHandler(this.btnScan_Click);
-            // 
             // txtScanResult
             // 
             this.txtScanResult.BackColor = System.Drawing.SystemColors.InfoText;
@@ -1436,26 +1462,6 @@
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(596, 11);
             this.progressBar1.TabIndex = 19;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.ForeColor = System.Drawing.Color.Black;
-            this.label11.Location = new System.Drawing.Point(416, 291);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(83, 20);
-            this.label11.TabIndex = 28;
-            this.label11.Text = "已耗时(秒):";
-            // 
-            // lblScanElasped
-            // 
-            this.lblScanElasped.AutoSize = true;
-            this.lblScanElasped.ForeColor = System.Drawing.Color.DarkRed;
-            this.lblScanElasped.Location = new System.Drawing.Point(520, 292);
-            this.lblScanElasped.Name = "lblScanElasped";
-            this.lblScanElasped.Size = new System.Drawing.Size(18, 20);
-            this.lblScanElasped.TabIndex = 29;
-            this.lblScanElasped.Text = "0";
             // 
             // frmMain
             // 
@@ -1596,7 +1602,6 @@
         private System.Windows.Forms.Label top_lblIPScan;
         private System.Windows.Forms.Panel panel_p5_adminScan;
         private System.Windows.Forms.ProgressBar progressBar1;
-        private System.Windows.Forms.Button btnScan;
         private System.Windows.Forms.DataGridView p5_dgvIPRangeList;
         public System.Windows.Forms.TextBox txtScanResult;
         private System.Windows.Forms.DataGridViewTextBoxColumn Seq;
@@ -1613,5 +1618,7 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label lblScanElasped;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Button btnScan;
+        private System.Windows.Forms.Button btnScanStop;
     }
 }
