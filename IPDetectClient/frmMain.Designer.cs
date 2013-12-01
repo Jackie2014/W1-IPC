@@ -1370,7 +1370,6 @@
             this.p5_dgvIPRangeList.ShowCellErrors = false;
             this.p5_dgvIPRangeList.Size = new System.Drawing.Size(593, 129);
             this.p5_dgvIPRangeList.TabIndex = 22;
-            
             // 
             // Seq
             // 
@@ -1469,8 +1468,8 @@
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.BackgroundImage = global::IPDectect.Client.Properties.Resources.back_1;
             this.ClientSize = new System.Drawing.Size(600, 375);
-            this.Controls.Add(this.panel_p5_adminScan);
             this.Controls.Add(this.Panel_P1_IPRetrive);
+            this.Controls.Add(this.panel_p5_adminScan);
             this.Controls.Add(this.Panel_P2_IPRetriving);
             this.Controls.Add(this.Panel_P3_route);
             this.Controls.Add(this.Panel_P4_logSearch);

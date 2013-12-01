@@ -626,7 +626,12 @@ namespace IPDectect.Client
 
         private void contextMenu_Exit_Click(object sender, EventArgs e)
         {
-            this.Close();
+            try
+            {
+                Application.Exit();
+                Environment.Exit(0);
+            }
+            catch { }
         }
 
         private void ToolStripMenuItem_Set_Click(object sender, EventArgs e)
